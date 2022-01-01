@@ -10,15 +10,16 @@ echo "2"
 sleep 1
 echo "1"
 sleep 1
-echo "Starting..."
-timedatectl set-ntp true
+echo "Starting...\n"
+echo "Plese enter BOOT partition:"
+# timedatectl set-ntp true
 cfdisk /dev/sda
 mkfs.ext4 -L BOOT /dev/sda1
 mkfs.ext4 -L ROOT /dev/sda2
 mount /dev/sda2 /mnt
 mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
-basestrap /mnt linux linux-firmware base base-devel os-prober vim neofetch git runit elogind-runit grub networkmanager xorg xorg-xinit xorg-server
+basestrap /mnt linux linux-firmware base base-devel os-prober vim neofetch git runit elogind-runit grub networkmanager xorg xorg-xinit xorg-server dhcpcd pcmanfm xf-86-video-intel libxft libxinerama
 fstabgen -U /mnt >> /mnt/etc/fstab
 mv ./installer_2 /mnt
 chmod +x /mnt/installer_2
